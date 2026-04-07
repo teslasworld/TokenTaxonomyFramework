@@ -1,0 +1,55 @@
+{
+  "name": "VRE-PARFE-HydroRE",
+  "description": "Extension Set for hardware-attested, ledger-anchored renewable energy generation dMRV. Reference implementation: run-of-river hydropower station (Mauritius). Issuing authority: Three T's (Mauritius) Limited. Verification layer: Hedera Consensus Service (HCS).",
+  "version": "1.0",
+  "documentation": "https://github.com/teslasworld/VP-preprod",
+  "entityExtensions": [
+    {
+      "entityExtensionTemplateId": "edb5fa85-fe2b-463b-8aba-e5c72a0ff079",
+      "name": "VRE PARFE Site Options"
+    },
+    {
+      "entityExtensionTemplateId": "0c050379-15d9-487d-98b9-11760b1ff70c",
+      "name": "Physics Gate Options"
+    },
+    {
+      "entityExtensionTemplateId": "7b95892e-f646-4162-bcdf-201b48d4eaa1",
+      "name": "Ledger Attestation Options"
+    }
+  ],
+  "modules": [
+    {
+      "id": "REC-MODULE",
+      "name": "Renewable Energy Certificate Module",
+      "description": "Issues REC tokens (kWh) for verified renewable energy generation. One REC represents 100 kWh of hardware-attested renewable generation. ISO 14064-1:2018 compliant.",
+      "entityExtensions": [
+        {
+          "entityExtensionTemplateId": "5125e1db-816a-4b71-a70a-7d144b7fbbca",
+          "name": "REC Module Options"
+        }
+      ]
+    },
+    {
+      "id": "H2O-MODULE",
+      "name": "Water Stewardship Certificate Module",
+      "description": "Issues H2O tokens (m³) for verified water flow in run-of-river hydropower operation. One H2O token represents 5,000 litres of verified water flow. ISO 14046:2014 compliant.",
+      "entityExtensions": [
+        {
+          "entityExtensionTemplateId": "34fc1b92-517c-4c07-8b66-0ddc21c04bbc",
+          "name": "H2O Module Options"
+        }
+      ]
+    },
+    {
+      "id": "CO2-MODULE",
+      "name": "Carbon Offset Certificate Module",
+      "description": "Issues CO2 tokens (kgCO₂e) representing the Grid Emission Factor (GEF)-adjusted carbon offset derived from verified renewable generation. co2Amount = measurementValue × gef. ISO 14064-1:2018 compliant.",
+      "entityExtensions": [
+        {
+          "entityExtensionTemplateId": "9b912725-d092-4311-9b7b-91b1f5554ead",
+          "name": "CO2 Module Options"
+        }
+      ]
+    }
+  ]
+}
