@@ -1,0 +1,25 @@
+{
+  "aimFixedVariables": [
+    {
+      "variableTemplateId": "gefValue",
+      "variableTemplateVersion": "VRE-PARFE:1.0",
+      "value": { "value": 0.9908, "u_o_m": "kgCO2e/kWh" },
+      "dataType": "vreparfe.extensionSet.DoubleValue",
+      "description": "Grid Emission Factor for Mauritius (MU) reference implementation. Source: Mauritius national grid emission factor. At production this value is read per-licensee from the LICENSE_GRANT HCS record."
+    },
+    {
+      "variableTemplateId": "capacityMW",
+      "variableTemplateVersion": "VRE-PARFE:1.0",
+      "value": { "value": 1.0, "u_o_m": "MW" },
+      "dataType": "vreparfe.extensionSet.DoubleValue",
+      "description": "Installed generation capacity of the reference run-of-river hydropower station in megawatts. Used to derive physicsLimitKwh. At production this value is read from the GATEWAY_DEPLOY HCS record."
+    },
+    {
+      "variableTemplateId": "physicsLimitKwh",
+      "variableTemplateVersion": "VRE-PARFE:1.0",
+      "value": { "value": 200, "u_o_m": "kWh" },
+      "dataType": "vreparfe.extensionSet.DoubleValue",
+      "description": "Maximum permissible kWh per single sensor reading for the reference implementation. Derived from capacityMW (1.0 MW) * 1000. Any TELEMETRY record with kwh > 200 is rejected by the edge notary before HCS submission. This is a mandatory fraud-prevention gate."
+    }
+  ]
+}
