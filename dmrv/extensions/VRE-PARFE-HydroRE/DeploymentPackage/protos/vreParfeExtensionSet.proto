@@ -1,0 +1,158 @@
+syntax = "proto3";
+
+package vreparfe.extensionSet;
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "VreParfe.ExtensionSet";
+option java_package = "vreparfe.extensionSet";
+option java_multiple_files = true;
+
+// ─── Basic scalar wrapper types ────────────────────────────────────────────────
+
+// A numeric measurement value with a unit of measure.
+message DoubleValue {
+  double value = 1;
+  string u_o_m = 2;
+}
+
+// A string value wrapper.
+message StringValue {
+  string value = 1;
+}
+
+// ─── Monitoring type enum ───────────────────────────────────────────────────────
+// Maps to MONITORING_TYPE_MAP in SCHEMAS_V2.js.
+// Determines which token type is minted from a sensor's telemetry:
+//   GENERATION, SOLAR, HYDRO, WIND → REC
+//   WATER_FLOW, WATER_CONSUMPTION  → H2O
+//   CARBON_OFFSET, EMISSIONS       → CO2
+
+enum MonitoringType {
+  GENERATION = 0;
+  SOLAR = 1;
+  HYDRO = 2;
+  WIND = 3;
+  WATER_FLOW = 4;
+  WATER_CONSUMPTION = 5;
+  CARBON_OFFSET = 6;
+  EMISSIONS = 7;
+}
+
+// ─── Token type enum ────────────────────────────────────────────────────────────
+// Maps to TOKEN_TYPES in SCHEMAS_V2.js.
+
+enum TokenType {
+  REC = 0;  // Renewable Energy Certificate – unit: kWh
+  H2O = 1;  // Water Stewardship Certificate – unit: m³
+  CO2 = 2;  // Carbon Offset Certificate – unit: kgCO₂e
+}
+
+// ─── GEF source enum ────────────────────────────────────────────────────────────
+// Determines whether the Grid Emission Factor (GEF) is a hardcoded constant
+// (testnet) or a per-licensee value retrieved from the LICENSE_GRANT HCS record
+// (production).
+
+enum GefSource {
+  SCHEMAS_CONSTANT = 0;          // Testnet: GEF_CONSTANT = 0.9908 from SCHEMAS_V2.js
+  LICENSE_GRANT_HCS_RECORD = 1;  // Production: per-licensee GEF from HCS governance record
+}
+
+// ─── Entity extension messages ──────────────────────────────────────────────────
+
+// VRE PARFE Site Options – extensionContext: ExtensionSet
+// Set once at site commissioning by the issuing authority.
+message SiteOptions {
+  MonitoringType monitoring_type = 1;
+  double grid_emission_factor = 2;
+  string jurisdiction = 3; // ISO 3166 Alpha-2 country code (e.g. "MU" for Mauritius)
+}
+
+// REC Module Options – extensionContext: ExtensionSetModule (REC-MODULE)
+message RECModuleOptions {
+  MonitoringType generation_type = 1;
+  double mint_threshold_kwh = 2; // Default: 100 kWh. At production: stored in LICENSE_GRANT HCS record.
+}
+
+// H2O Module Options – extensionContext: ExtensionSetModule (H2O-MODULE)
+message H2OModuleOptions {
+  string water_source_type = 1; // e.g. "River", "Reservoir"
+  double mint_threshold_litres = 2; // Default: 5000 L. At production: stored in LICENSE_GRANT HCS record.
+}
+
+// CO2 Module Options – extensionContext: ExtensionSetModule (CO2-MODULE)
+message CO2ModuleOptions {
+  GefSource gef_source = 1;
+  double gef_value = 2; // Mauritius baseline: 0.9908 kgCO₂e/kWh
+}
+
+// Physics Gate Options – extensionContext: ExtensionSet
+// The physics gate is a mandatory fraud-prevention mechanism.
+// capacityMW is stored in the GATEWAY_DEPLOY HCS record at commissioning.
+// The edge notary hydrates physicsLimitKwh at startup from the HCS record.
+message PhysicsGateOptions {
+  double capacity_mw = 1;         // Installed generation capacity in megawatts
+  double max_kwh_per_reading = 2; // Derived: capacityMW × 1000 × readingIntervalHours
+  string derived_from = 3;        // Always "GATEWAY_DEPLOY_HCS_RECORD"
+}
+
+// Ledger Attestation Options – extensionContext: ExtensionSet
+// Records the novel ledger-anchoring contribution of this Extension Set.
+// Every TELEMETRY record is signed with Ed25519 and anchored to HCS.
+// The full public key PEM is embedded in sig.pub of every TELEMETRY message,
+// enabling self-contained verification without an external key registry.
+message LedgerAttestationOptions {
+  string ledger = 1;               // "Hedera"
+  string network = 2;              // "mainnet" or "testnet"
+  string signature_algorithm = 3;  // "Ed25519"
+  string schema_immutability = 4;  // "FROZEN_OBJECT" – schema cannot be mutated post-signing
+  bool pub_key_in_payload = 5;     // true – full PEM in sig.pub on every HCS message
+}
+
+// Variable Template Options – extensionContext: VariableTemplate
+// Controls which variable templates apply per monitoring type and whether
+// a variable is required for the physics validation gate.
+message VariableTemplateOptions {
+  MonitoringType applies_for_monitoring_type = 1; // Use GENERATION (0) as sentinel for "ALL"
+  bool required_for_physics_check = 2;
+}
+
+// ─── Message pair types ─────────────────────────────────────────────────────────
+
+// Hardware Attestation Verification – Request
+// Verifies the Ed25519 cryptographic signature on a specific TELEMETRY HCS record.
+message AttestationVerificationRequest {
+  string hcs_topic_id = 1;        // Hedera topic ID (format: 0.0.XXXXXXX)
+  int64 hcs_sequence_number = 2;  // Specific HCS sequence number to verify
+  string sensor_ref = 3;          // Sensor reference ID (format: SEN-ZEM63-XXXX)
+}
+
+// Hardware Attestation Verification – Response
+message AttestationVerificationResponse {
+  string hcs_topic_id = 1;
+  int64 hcs_sequence_number = 2;
+  string sensor_ref = 3;
+  bool signature_valid = 4;          // true if the Ed25519 signature is valid
+  string payload_hash = 5;           // SHA-256 hex hash of the stable-stringified payload
+  string public_key_fingerprint = 6; // Short fingerprint (kid) of the verification key
+}
+
+// Physics Gate Exception – Request
+// Records a physics gate rejection. Written when kwh > physicsLimitKwh.
+message PhysicsGateExceptionRequest {
+  string sensor_ref = 1;
+  string gateway_ref = 2;
+  double rejected_kwh = 3;
+  double physics_limit_kwh = 4;
+  google.protobuf.Timestamp timestamp = 5;
+}
+
+// Physics Gate Exception – Response
+message PhysicsGateExceptionResponse {
+  string sensor_ref = 1;
+  string gateway_ref = 2;
+  double rejected_kwh = 3;
+  double physics_limit_kwh = 4;
+  google.protobuf.Timestamp timestamp = 5;
+  string disposition_code = 6; // Fixed value: "REJECTED_PHYSICS_GATE"
+}
