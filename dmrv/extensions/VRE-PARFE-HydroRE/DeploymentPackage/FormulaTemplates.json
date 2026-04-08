@@ -1,1 +1,71 @@
-{"formulaTemplates":[{"id":"31363c4c-615b-434b-8a69-8a512928d452","name":"VRE-PARFE CO2 Offset - Equation 1","description":"co2Amount = measurementValue * gefValue. Mauritius baseline GEF: 0.9908 kgCO2e/kWh.","version":"VRE-PARFE:1.0","documentation":"inherited","formula":"co2Amount = measurementValue * gefValue","variableTemplates":[{"variableTemplateId":"co2Amount","variableTemplateVersion":"VRE-PARFE:1.0"},{"variableTemplateId":"measurementValue","variableTemplateVersion":"VRE-PARFE:1.0"},{"variableTemplateId":"gefValue","variableTemplateVersion":"VRE-PARFE:1.0"}],"modules":["CO2-MODULE"]},{"id":"d9f13704-1fa0-4817-8175-793fb1888147","name":"VRE-PARFE Physics Gate - Equation 2","description":"physicsLimitKwh = capacityMW * 1000. Mandatory fraud-prevention gate.","version":"VRE-PARFE:1.0","documentation":"inherited","formula":"physicsLimitKwh = capacityMW * 1000","variableTemplates":[{"variableTemplateId":"physicsLimitKwh","variableTemplateVersion":"VRE-PARFE:1.0"},{"variableTemplateId":"capacityMW","variableTemplateVersion":"VRE-PARFE:1.0"}],"modules":["REC-MODULE","H2O-MODULE","CO2-MODULE"]},{"id":"9793dfbd-174e-42a1-81dd-b526005440f8","name":"VRE-PARFE REC Mint Threshold - Equation 3","description":"recMinted = floor(measurementValue / 100). Each REC = 100 kWh.","version":"VRE-PARFE:1.0","documentation":"inherited","formula":"recMinted = floor(measurementValue / 100)","variableTemplates":[{"variableTemplateId":"measurementValue","variableTemplateVersion":"VRE-PARFE:1.0"},{"variableTemplateId":"kwhReading","variableTemplateVersion":"VRE-PARFE:1.0"}],"modules":["REC-MODULE"]}]}
+{
+  "formulaTemplates": [
+    {
+      "id": "31363c4c-615b-434b-8a69-8a512928d452",
+      "name": "VRE-PARFE CO2 Offset — Equation 1",
+      "description": "Carbon offset quantity derived from verified renewable energy generation. measurementValue is the accumulated kWh from hardware-attested TELEMETRY records. gef is the Grid Emission Factor for the licensee's jurisdiction (Mauritius baseline: 0.9908 kgCO₂e/kWh), stored in the LICENSE_GRANT HCS record at production.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "dataSchemaOrType": "",
+      "dataExample": "{}",
+      "formula": "co2Amount = measurementValue * gefValue",
+      "variableTemplates": [
+        {
+          "variableTemplateId": "co2Amount",
+          "variableTemplateVersion": "VRE-PARFE:1.0"
+        },
+        {
+          "variableTemplateId": "measurementValue",
+          "variableTemplateVersion": "VRE-PARFE:1.0"
+        },
+        {
+          "variableTemplateId": "gefValue",
+          "variableTemplateVersion": "VRE-PARFE:1.0"
+        }
+      ],
+      "modules": ["CO2-MODULE"]
+    },
+    {
+      "id": "d9f13704-1fa0-4817-8175-793fb1888147",
+      "name": "VRE-PARFE Physics Gate — Equation 2",
+      "description": "Maximum permissible kWh per single sensor reading, derived from the site's installed generation capacity. Any TELEMETRY record with kwh > physicsLimitKwh is rejected by the edge notary before HCS submission. This is a mandatory fraud-prevention gate — not an optional check. capacityMW is stored in the GATEWAY_DEPLOY HCS record set by the issuing authority at gateway commissioning.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "dataSchemaOrType": "",
+      "dataExample": "{}",
+      "formula": "physicsLimitKwh = capacityMW * 1000",
+      "variableTemplates": [
+        {
+          "variableTemplateId": "physicsLimitKwh",
+          "variableTemplateVersion": "VRE-PARFE:1.0"
+        },
+        {
+          "variableTemplateId": "capacityMW",
+          "variableTemplateVersion": "VRE-PARFE:1.0"
+        }
+      ],
+      "modules": ["REC-MODULE", "H2O-MODULE", "CO2-MODULE"]
+    },
+    {
+      "id": "9793dfbd-174e-42a1-81dd-b52600544f48",
+      "name": "VRE-PARFE REC Mint Threshold — Equation 3",
+      "description": "Number of REC tokens minted when accumulated verified kWh crosses the mint threshold. MINT_THRESHOLD_KWH is 100 kWh for testnet; at production this is stored per-licensee in the LICENSE_GRANT HCS record. Each REC represents 100 kWh of verified renewable generation.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "dataSchemaOrType": "",
+      "dataExample": "{}",
+      "formula": "recMinted = floor(measurementValue / 100)",
+      "variableTemplates": [
+        {
+          "variableTemplateId": "measurementValue",
+          "variableTemplateVersion": "VRE-PARFE:1.0"
+        },
+        {
+          "variableTemplateId": "kwhReading",
+          "variableTemplateVersion": "VRE-PARFE:1.0"
+        }
+      ],
+      "modules": ["REC-MODULE"]
+    }
+  ]
+}
