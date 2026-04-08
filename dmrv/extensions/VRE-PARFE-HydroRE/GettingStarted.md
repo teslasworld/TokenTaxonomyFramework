@@ -121,5 +121,87 @@ If all five steps pass, the certificate is valid. No trust required.
 | VRE PARFE source repository | https://github.com/teslasworld/VP-preprod |
 
 ---
+## Live Reference Data — Hedera Testnet
+
+The following Hedera Consensus Service topics contain live reference data for this Extension Set. All topics are on Hedera **testnet** and publicly readable without authentication at [hashscan.io](https://hashscan.io/testnet).
+
+> **Note on testnet:** The protocol operates on Hedera testnet for pre-production validation. Tokens carry no monetary value. The testnet is used to prove the complete end-to-end process — from hardware measurement through physics validation, cryptographic signing, ledger anchoring, and token issuance — before mainnet deployment. The integrity properties demonstrated here are identical on mainnet.
+
+---
+
+### Topic 0.0.7498906 — Asset Telemetry & Token Issuance
+**Purpose:** Primary REC/H2O/CO2 token minting stream.
+
+Every message is a complete asset record containing:
+- Issuer identity (Three T's (Mauritius) Limited, reg. C19166743)
+- Asset class (REC / H2O / CO2) and unique serial number
+- Measurement value (kWh) and Grid Emission Factor (0.9908 kgCO₂e/kWh)
+- Regulatory classifications: ISO 14064-1:2018, EU-CBAM-COMPLIANT, US-GAAP Scope 2, CORSIA-Eligible
+- Fiscal policy split: PRIMARY 70/20/7/3% | SECONDARY 4/4/1% PERPETUITY
+- Verification method: Hedera Consensus Service (HCS)
+
+**Hashscan:** https://hashscan.io/testnet/topic/0.0.7498906
+
+---
+
+### Topic 0.0.7546907 — Sovereign Governance Spine
+**Purpose:** Immutable governance and commissioning record.
+
+Contains the complete lifecycle of the licensee, gateway, and sensor registration:
+- `LICENSE_GRANT` — licensee identity, jurisdiction, asset type, agreement reference
+- `GATEWAY_DEPLOY` — gateway hardware MAC, location, capacityMW, Ed25519 public key, commissioning date
+- `SENSOR_LINK` — sensor serial number, model (ZEM-63), manufacturer (EpiSensor), calibration date, Ed25519 public key, ACTIVE status
+
+Every governance record is:
+- Signed by the Sovereign DID (`did:three-ts:grandfather:0.0.7479746`)
+- Immutable once written — cannot be altered or deleted
+- Publicly verifiable without any trust relationship with the issuing authority
+
+**Hashscan:** https://hashscan.io/testnet/topic/0.0.7546907
+
+---
+
+### Topic 0.0.8480236 — Edge-Notary Signed Telemetry (V2.2)
+**Purpose:** Cryptographically signed hardware telemetry — the primary evidence layer for ISSA 5000 assurance.
+
+This is the most technically significant topic for independent verification. Every message contains:
+- Raw hardware measurement (`kwh`) from the ZEM-63 revenue-grade meter
+- Hardware sequence number (`seq`) for gap detection
+- **Full Ed25519 public key PEM embedded in every message** — no external key registry required
+- **SHA-256 payload hash** of the stable-stringified telemetry
+- **Ed25519 signature** over the payload hash, produced by the ZGW10 gateway's hardware signing key
+- Algorithm declaration: `Ed25519+SHA256(stable-json)`
+
+**Independent verification procedure:**
+Any party can verify any record by:
+1. Retrieving the message from the Hedera mirror node
+2. Recomputing the SHA-256 hash of the stable-stringified payload
+3. Verifying the Ed25519 signature against the embedded `sig.pub` public key
+4. Confirming the hardware sequence number is monotonically increasing (gap detection)
+
+No account, API key, or trust relationship with Three T's (Mauritius) Limited is required at any step.
+
+**Hashscan:** https://hashscan.io/testnet/topic/0.0.8480236
+
+---
+
+### The Verification Chain — Summary
+
+```
+ZEM-63 meter (hardware measurement)
+    ↓
+ZGW10 gateway (physics gate → Ed25519 sign → SHA-256 hash)
+    ↓
+Topic 0.0.8480236 (signed telemetry — primary evidence)
+    ↓
+Topic 0.0.7546907 (governance spine — LICENSE_GRANT, GATEWAY_DEPLOY, SENSOR_LINK)
+    ↓
+Topic 0.0.7498906 (token issuance — REC/H2O/CO2 mint events)
+    ↓
+HTS NFT (proof-carrying token with seq_from/seq_to reference back to 0.0.8480236)
+```
+
+The chain is complete, public, immutable, and self-verifying at every layer.
+
 
 *VRE-PARFE-HydroRE Extension Set v1.0 | Three T's (Mauritius) Limited | 2026*
