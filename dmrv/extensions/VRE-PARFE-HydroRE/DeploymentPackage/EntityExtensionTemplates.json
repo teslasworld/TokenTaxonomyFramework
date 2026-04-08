@@ -1,1 +1,77 @@
-{"entityExtensionTemplates":[{"id":"edb5fa85-fe2b-463b-8aba-e5c72a0ff079","name":"VRE PARFE Site Options","description":"Describes the renewable energy site configuration — monitoring type, jurisdiction, and Grid Emission Factor baseline. Set once at site commissioning by the issuing authority.","version":"VRE-PARFE:1.0","documentation":"inherited","extensionContext":"ExtensionSet","dataSchemaOrType":"vreparfe.extensionSet.SiteOptions","dataExample":{"monitoringType":"HYDRO","gridEmissionFactor":0.9908,"jurisdiction":"MU"}},{"id":"5125e1db-816a-4b71-a70a-7d144b7fbbca","name":"REC Module Options","description":"Configuration for the Renewable Energy Certificate module. Specifies the generation type and the kWh threshold at which a REC token is minted.","version":"VRE-PARFE:1.0","documentation":"inherited","extensionContext":"ExtensionSetModule","module":"REC-MODULE","dataSchemaOrType":"vreparfe.extensionSet.RECModuleOptions","dataExample":{"generationType":"HYDRO","mintThresholdKwh":100}},{"id":"34fc1b92-517c-4c07-8b66-0ddc21c04bbc","name":"H2O Module Options","description":"Configuration for the Water Stewardship Certificate module. Specifies the water source type and the litre threshold at which an H2O token is minted.","version":"VRE-PARFE:1.0","documentation":"inherited","extensionContext":"ExtensionSetModule","module":"H2O-MODULE","dataSchemaOrType":"vreparfe.extensionSet.H2OModuleOptions","dataExample":{"waterSourceType":"River","mintThresholdLitres":5000}},{"id":"9b912725-d092-4311-9b7b-91b1f5554ead","name":"CO2 Module Options","description":"Configuration for the Carbon Offset Certificate module. Specifies the source of the Grid Emission Factor (GEF) — either a constant from SCHEMAS_V2 (testnet) or a per-licensee value from the LICENSE_GRANT HCS record (production).","version":"VRE-PARFE:1.0","documentation":"inherited","extensionContext":"ExtensionSetModule","module":"CO2-MODULE","dataSchemaOrType":"vreparfe.extensionSet.CO2ModuleOptions","dataExample":{"gefSource":"LICENSE_GRANT_HCS_RECORD","gefValue":0.9908}},{"id":"fdbc4fc4-5976-4055-9036-be6311b2536f","name":"Variable Template Options","description":"Flags that control which variable templates apply for a given monitoring type and whether the variable is required for the physics validation gate.","version":"VRE-PARFE:1.0","documentation":"inherited","extensionContext":"VariableTemplate","dataSchemaOrType":"vreparfe.extensionSet.VariableTemplateOptions","dataExample":{"appliesForMonitoringType":"HYDRO","requiredForPhysicsCheck":true}},{"id":"0c050379-15d9-487d-98b9-11760b1ff70c","name":"Physics Gate Options","description":"Records the physics validation configuration for the site. The edge notary rejects any TELEMETRY reading where kwh > maxKwhPerReading. This is a mandatory fraud-prevention gate. capacityMW is stored in the GATEWAY_DEPLOY HCS record at gateway commissioning.","version":"VRE-PARFE:1.0","documentation":"inherited","extensionContext":"ExtensionSet","dataSchemaOrType":"vreparfe.extensionSet.PhysicsGateOptions","dataExample":{"capacityMw":1.0,"maxKwhPerReading":200,"derivedFrom":"GATEWAY_DEPLOY_HCS_RECORD"}},{"id":"7b95892e-f646-4162-bcdf-201b48d4eaa1","name":"Ledger Attestation Options","description":"Records the ledger anchoring configuration. Every TELEMETRY record is written to the Hedera Consensus Service with an Ed25519 cryptographic signature over a SHA-256 hash of the stable-stringified payload. The full Ed25519 public key PEM is embedded in sig.pub of every TELEMETRY message, enabling fully self-contained verification without an external key registry lookup. The schema used to produce the payload is frozen and cannot be mutated post-signing.","version":"VRE-PARFE:1.0","documentation":"inherited","extensionContext":"ExtensionSet","dataSchemaOrType":"vreparfe.extensionSet.LedgerAttestationOptions","dataExample":{"ledger":"Hedera","network":"mainnet","signatureAlgorithm":"Ed25519","schemaImmutability":"FROZEN_OBJECT","pubKeyInPayload":true}}]}
+{
+  "entityExtensionTemplates": [
+    {
+      "id": "edb5fa85-fe2b-463b-8aba-e5c72a0ff079",
+      "name": "VRE PARFE Site Options",
+      "description": "Describes the renewable energy site configuration — monitoring type, jurisdiction, and Grid Emission Factor baseline. Set once at site commissioning by the issuing authority.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "extensionContext": "ExtensionSet",
+      "dataSchemaOrType": "vreparfe.extensionSet.SiteOptions",
+      "dataExample": "{ \"monitoringType\": \"Hydro\", \"gridEmissionFactor\": 0.9908, \"jurisdiction\": \"MU\" }"
+    },
+    {
+      "id": "5125e1db-816a-4b71-a70a-7d144b7fbbca",
+      "name": "REC Module Options",
+      "description": "Configuration for the Renewable Energy Certificate module. Specifies the generation type and the kWh threshold at which a REC token is minted.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "extensionContext": "ExtensionSetModule",
+      "module": "REC-MODULE",
+      "dataSchemaOrType": "vreparfe.extensionSet.RECModuleOptions",
+      "dataExample": "{ \"generationType\": \"Hydro\", \"mintThresholdKwh\": 100 }"
+    },
+    {
+      "id": "34fc1b92-517c-4c07-8b66-0ddc21c04bbc",
+      "name": "H2O Module Options",
+      "description": "Configuration for the Water Stewardship Certificate module. Specifies the water source type and the litre threshold at which an H2O token is minted.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "extensionContext": "ExtensionSetModule",
+      "module": "H2O-MODULE",
+      "dataSchemaOrType": "vreparfe.extensionSet.H2OModuleOptions",
+      "dataExample": "{ \"waterSourceType\": \"River\", \"mintThresholdLitres\": 5000 }"
+    },
+    {
+      "id": "9b912725-d092-4311-9b7b-91b1f5554ead",
+      "name": "CO2 Module Options",
+      "description": "Configuration for the Carbon Offset Certificate module. Specifies the source of the Grid Emission Factor (GEF) — either a constant from SCHEMAS_V2 (testnet) or a per-licensee value from the LICENSE_GRANT HCS record (production).",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "extensionContext": "ExtensionSetModule",
+      "module": "CO2-MODULE",
+      "dataSchemaOrType": "vreparfe.extensionSet.CO2ModuleOptions",
+      "dataExample": "{ \"gefSource\": \"LICENSE_GRANT_HCS_RECORD\", \"gefValue\": 0.9908 }"
+    },
+    {
+      "id": "fdbc4fc4-5976-4055-9036-be6311b2536f",
+      "name": "Variable Template Options",
+      "description": "Flags that control which variable templates apply for a given monitoring type and whether the variable is required for the physics validation gate.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "extensionContext": "VariableTemplate",
+      "dataSchemaOrType": "vreparfe.extensionSet.VariableTemplateOptions",
+      "dataExample": "{ \"appliesForMonitoringType\": \"Hydro\", \"requiredForPhysicsCheck\": true }"
+    },
+    {
+      "id": "0c050379-15d9-487d-98b9-11760b1ff70c",
+      "name": "Physics Gate Options",
+      "description": "Records the physics validation configuration for the site. The edge notary rejects any TELEMETRY reading where kwh > maxKwhPerReading. This is a mandatory fraud-prevention gate. capacityMW is stored in the GATEWAY_DEPLOY HCS record at gateway commissioning.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "extensionContext": "ExtensionSet",
+      "dataSchemaOrType": "vreparfe.extensionSet.PhysicsGateOptions",
+      "dataExample": "{ \"capacityMw\": 1.0, \"maxKwhPerReading\": 200, \"derivedFrom\": \"GATEWAY_DEPLOY_HCS_RECORD\" }"
+    },
+    {
+      "id": "7b95892e-f646-4162-bcdf-201b48d4eaa1",
+      "name": "Ledger Attestation Options",
+      "description": "Records the ledger anchoring configuration. Every TELEMETRY record is written to the Hedera Consensus Service with an Ed25519 cryptographic signature over a SHA-256 hash of the stable-stringified payload. The full Ed25519 public key PEM is embedded in sig.pub of every TELEMETRY message, enabling fully self-contained verification without an external key registry lookup. The schema used to produce the payload is frozen and cannot be mutated post-signing.",
+      "version": "VRE-PARFE:1.0",
+      "documentation": "inherited",
+      "extensionContext": "ExtensionSet",
+      "dataSchemaOrType": "vreparfe.extensionSet.LedgerAttestationOptions",
+      "dataExample": "{ \"ledger\": \"Hedera\", \"network\": \"mainnet\", \"signatureAlgorithm\": \"Ed25519\", \"schemaImmutability\": \"FROZEN_OBJECT\", \"pubKeyInPayload\": true }"
+    }
+  ]
+}
