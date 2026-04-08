@@ -200,7 +200,7 @@ Topic 0.0.7498906 (token issuance — REC/H2O/CO2 mint events)
     ↓
 HTS NFT (proof-carrying token with seq_from/seq_to reference back to 0.0.8480236)
 ```
-
+Note on current data: The testnet topics referenced above are populated by emulated sensors and gateway simulators built to mirror the planned installation parameters of the Three T's (Mauritius) hydropower station. The emulation accurately reflects the physical specifications of the ZEM-63 revenue-grade meter and ZGW10 gateway. Live hardware integration with EpiSensor production devices is in progress. Mainnet deployment will follow station commissioning.
 The chain is complete, public, immutable, and self-verifying at every layer.
 
 
