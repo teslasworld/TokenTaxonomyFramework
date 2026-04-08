@@ -1,1 +1,129 @@
-{\n  "claimSources": [\n    {\n      "id": "cd066bbe-abf2-4bb4-8a89-efb84626caab",\n      "name": "ZEM63 Energy Meter",\n      "description": "EpiSensor ZEM63 sub-metering unit connected to the ZGW10 gateway via RS-485/Modbus. Provides interval energy readings in kWh. The hardware serial number and sensor reference are registered in the SENSOR_LINK HCS record at commissioning. This is the primary measurement source - the physical foundation of the entire protocol.",\n      "sourceType": "SensorDevice",\n      "reportingFrequency": "Continuous",\n      "sourceIdentifier": "SEN-ZEM63-0002",\n      "variables": [\n        { "variableTemplateId": "kwhReading",   "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "sensorRef",    "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "sensorSeq",    "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "edSig",        "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "payloadHash",  "variableTemplateVersion": "VRE-PARFE:1.0" }\n      ]\n    },\n    {\n      "id": "ac144808-f8a7-40f3-b2f0-b2baf330ee72",\n      "name": "ZGW10 IoT Gateway",\n      "description": "EpiSensor ZGW10 IoT gateway running the edge-notary stack. Receives MQTT telemetry from the ZEM63 meter, applies the physics validation gate, signs each reading with Ed25519, buffers to disk, and submits to HCS. The gateway reference and hardware MAC are registered in the GATEWAY_DEPLOY HCS record at commissioning.",\n      "sourceType": "SensorDevice",\n      "reportingFrequency": "Continuous",\n      "sourceIdentifier": "GW-ZGW10-0001",\n      "variables": [\n        { "variableTemplateId": "gatewayRef",  "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "hcsTopicId",  "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "hcsSeqFrom",  "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "hcsSeqTo",    "variableTemplateVersion": "VRE-PARFE:1.0" }\n      ]\n    },\n    {\n      "id": "43be59e6-8f10-441e-96a8-31edf5c078eb",\n      "name": "HCS Ledger Record",\n      "description": "Hedera Consensus Service immutable topic. Every TELEMETRY record and MINT_EVENT record is written here in sequence. Any party can independently verify the full telemetry history by replaying the topic from sequence 1 at https://hashscan.io - no account, no API key, and no trust in the issuing authority is required.",\n      "sourceType": "Reference",\n      "reportingFrequency": "Continuous",\n      "sourceIdentifier": "hedera:hcs:1:0.0.7498906",\n      "variables": [\n        { "variableTemplateId": "hcsTopicId",       "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "hcsSeqFrom",       "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "hcsSeqTo",         "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "measurementValue", "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "co2Amount",        "variableTemplateVersion": "VRE-PARFE:1.0" }\n      ]\n    },\n    {\n      "id": "51a45531-d796-4414-b7c1-06ed6807f9bc",\n      "name": "LICENSE_GRANT HCS Record",\n      "description": "Sovereign governance record on HCS. Contains per-licensee GEF, capacityMW, and mint thresholds. Set by the issuing authority (Three T's (Mauritius) Limited) at commissioning. Immutable once written.",\n      "sourceType": "Document",\n      "reportingFrequency": "OneTime",\n      "sourceIdentifier": "hedera:hcs:1:0.0.7546907",\n      "variables": [\n        { "variableTemplateId": "gefValue",    "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "licenseeRef", "variableTemplateVersion": "VRE-PARFE:1.0" },\n        { "variableTemplateId": "capacityMW",  "variableTemplateVersion": "VRE-PARFE:1.0" }\n      ]\n    }\n  ]\n}
+{
+  "claimSources": [
+    {
+      "id": "cd066bbe-abf2-4bb4-8a89-efb84626caab",
+      "name": "ZEM63 Energy Meter",
+      "description": "EpiSensor ZEM63 sub-metering unit connected to the ZGW10 gateway via RS-485/Modbus. Provides interval energy readings in kWh. The hardware serial number and sensor reference are registered in the SENSOR_LINK HCS record at commissioning. This is the primary measurement source - the physical foundation of the entire protocol.",
+      "sourceType": "SensorDevice",
+      "reportingFrequency": "Continuous",
+      "sourceIdentifier": "SEN-ZEM63-0002",
+      "variableTemplates": [
+        {
+          "variableTemplateId": "kwhReading",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "sem63-0002-kwh"
+        },
+        {
+          "variableTemplateId": "sensorRef",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "sem63-0002-sensorRef"
+        },
+        {
+          "variableTemplateId": "sensorSeq",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "sem63-0002-sensorSeq"
+        },
+        {
+          "variableTemplateId": "edSig",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "sem63-0002-edSig"
+        },
+        {
+          "variableTemplateId": "payloadHash",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "sem63-0002-payloadHash"
+        }
+      ]
+    },
+    {
+      "id": "ac144808-f8a7-40f3-b2f0-b2baf330ee72",
+      "name": "ZGW10 IoT Gateway",
+      "description": "EpiSensor ZGW10 IoT gateway running the edge-notary stack. Receives MQTT telemetry from the ZEM63 meter, applies the physics validation gate, signs each reading with Ed25519, buffers to disk, and submits to HCS. The gateway reference and hardware MAC are registered in the GATEWAY_DEPLOY HCS record at commissioning.",
+      "sourceType": "SensorDevice",
+      "reportingFrequency": "Continuous",
+      "sourceIdentifier": "GW-ZGW10-0001",
+      "variableTemplates": [
+        {
+          "variableTemplateId": "gatewayRef",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "zgw10-0001-gatewayRef"
+        },
+        {
+          "variableTemplateId": "hcsTopicId",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "zgw10-0001-hcsTopicId"
+        },
+        {
+          "variableTemplateId": "hcsSeqFrom",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "zgw10-0001-hcsSeqFrom"
+        },
+        {
+          "variableTemplateId": "hcsSeqTo",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "zgw10-0001-hcsSeqTo"
+        }
+      ]
+    },
+    {
+      "id": "43be59e6-8f10-441e-96a8-31edf5c078eb",
+      "name": "HCS Ledger Record",
+      "description": "Hedera Consensus Service immutable topic. Every TELEMETRY record and MINT_EVENT record is written here in sequence. Any party can independently verify the full telemetry history by replaying the topic from sequence 1 at https://hashscan.io - no account, no API key, and no trust in the issuing authority is required.",
+      "sourceType": "Reference",
+      "reportingFrequency": "Continuous",
+      "sourceIdentifier": "hedera:hcs:1:0.0.7498906",
+      "variableTemplates": [
+        {
+          "variableTemplateId": "hcsTopicId",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "hedera:hcs:1:0.0.7498906-topicId"
+        },
+        {
+          "variableTemplateId": "hcsSeqFrom",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "hedera:hcs:1:0.0.7498906-seqFrom"
+        },
+        {
+          "variableTemplateId": "hcsSeqTo",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "hedera:hcs:1:0.0.7498906-seqTo"
+        },
+        {
+          "variableTemplateId": "measurementValue",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "hedera:hcs:1:0.0.7498906-measurementValue"
+        },
+        {
+          "variableTemplateId": "co2Amount",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "hedera:hcs:1:0.0.7498906-co2Amount"
+        }
+      ]
+    },
+    {
+      "id": "51a45531-d796-4414-b7c1-06ed6807f9bc",
+      "name": "LICENSE_GRANT HCS Record",
+      "description": "Sovereign governance record on HCS. Contains per-licensee GEF, capacityMW, and mint thresholds. Set by the issuing authority (Three T's (Mauritius) Limited) at commissioning. Immutable once written.",
+      "sourceType": "Document",
+      "reportingFrequency": "OneTime",
+      "sourceIdentifier": "hedera:hcs:1:0.0.7546907",
+      "variableTemplates": [
+        {
+          "variableTemplateId": "gefValue",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "hedera:hcs:1:0.0.7546907-gefValue"
+        },
+        {
+          "variableTemplateId": "licenseeRef",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "hedera:hcs:1:0.0.7546907-licenseeRef"
+        },
+        {
+          "variableTemplateId": "capacityMW",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "hedera:hcs:1:0.0.7546907-capacityMW"
+        }
+      ]
+    }
+  ]
+}
