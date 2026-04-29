@@ -8,7 +8,7 @@
       "documentation": "inherited",
       "extensionContext": "ExtensionSet",
       "dataSchemaOrType": "vreparfe.extensionSet.SiteOptions",
-      "dataExample": "{ \"monitoringType\": \"Hydro\", \"gridEmissionFactor\": 0.9908, \"jurisdiction\": \"MU\" }"
+      "dataExample": "{ \"monitoringType\": \"HYDRO\", \"gridEmissionFactor\": 0.9908, \"jurisdiction\": \"MU\" }"
     },
     {
       "id": "5125e1db-816a-4b71-a70a-7d144b7fbbca",
@@ -17,9 +17,9 @@
       "version": "VRE-PARFE:1.0",
       "documentation": "inherited",
       "extensionContext": "ExtensionSetModule",
-      "module": "REC-MODULE",
+      "modules": ["REC-MODULE"],
       "dataSchemaOrType": "vreparfe.extensionSet.RECModuleOptions",
-      "dataExample": "{ \"generationType\": \"Hydro\", \"mintThresholdKwh\": 100 }"
+      "dataExample": "{ \"generationType\": \"HYDRO\", \"mintThresholdKwh\": 100 }"
     },
     {
       "id": "34fc1b92-517c-4c07-8b66-0ddc21c04bbc",
@@ -28,7 +28,7 @@
       "version": "VRE-PARFE:1.0",
       "documentation": "inherited",
       "extensionContext": "ExtensionSetModule",
-      "module": "H2O-MODULE",
+      "modules": ["H2O-MODULE"],
       "dataSchemaOrType": "vreparfe.extensionSet.H2OModuleOptions",
       "dataExample": "{ \"waterSourceType\": \"River\", \"mintThresholdLitres\": 5000 }"
     },
@@ -39,7 +39,7 @@
       "version": "VRE-PARFE:1.0",
       "documentation": "inherited",
       "extensionContext": "ExtensionSetModule",
-      "module": "CO2-MODULE",
+      "modules": ["CO2-MODULE"],
       "dataSchemaOrType": "vreparfe.extensionSet.CO2ModuleOptions",
       "dataExample": "{ \"gefSource\": \"LICENSE_GRANT_HCS_RECORD\", \"gefValue\": 0.9908 }"
     },
@@ -51,7 +51,7 @@
       "documentation": "inherited",
       "extensionContext": "VariableTemplate",
       "dataSchemaOrType": "vreparfe.extensionSet.VariableTemplateOptions",
-      "dataExample": "{ \"appliesForMonitoringType\": \"Hydro\", \"requiredForPhysicsCheck\": true }"
+      "dataExample": "{ \"appliesForMonitoringType\": \"HYDRO\", \"requiredForPhysicsCheck\": true }"
     },
     {
       "id": "0c050379-15d9-487d-98b9-11760b1ff70c",
