@@ -6,7 +6,7 @@
       "description": "Carbon offset quantity derived from verified renewable energy generation. measurementValue is the accumulated kWh from hardware-attested TELEMETRY records. gef is the Grid Emission Factor for the licensee's jurisdiction (Mauritius baseline: 0.9908 kgCO₂e/kWh), stored in the LICENSE_GRANT HCS record at production.",
       "version": "VRE-PARFE:1.0",
       "documentation": "inherited",
-      "dataSchemaOrType": "",
+      "dataSchemaOrType": "vreparfe.extensionSet.CO2OffsetFormula",
       "dataExample": "{}",
       "formula": "co2Amount = measurementValue * gefValue",
       "variableTemplates": [
@@ -31,7 +31,7 @@
       "description": "Maximum permissible kWh per single sensor reading, derived from the site's installed generation capacity. Any TELEMETRY record with kwh > physicsLimitKwh is rejected by the edge notary before HCS submission. This is a mandatory fraud-prevention gate — not an optional check. capacityMW is stored in the GATEWAY_DEPLOY HCS record set by the issuing authority at gateway commissioning.",
       "version": "VRE-PARFE:1.0",
       "documentation": "inherited",
-      "dataSchemaOrType": "",
+      "dataSchemaOrType": "vreparfe.extensionSet.PhysicsGateFormula",
       "dataExample": "{}",
       "formula": "physicsLimitKwh = capacityMW * 1000",
       "variableTemplates": [
@@ -52,7 +52,7 @@
       "description": "Number of REC tokens minted when accumulated verified kWh crosses the mint threshold. MINT_THRESHOLD_KWH is 100 kWh for testnet; at production this is stored per-licensee in the LICENSE_GRANT HCS record. Each REC represents 100 kWh of verified renewable generation.",
       "version": "VRE-PARFE:1.0",
       "documentation": "inherited",
-      "dataSchemaOrType": "",
+      "dataSchemaOrType": "vreparfe.extensionSet.RECMintThresholdFormula",
       "dataExample": "{}",
       "formula": "recMinted = floor(measurementValue / 100)",
       "variableTemplates": [
