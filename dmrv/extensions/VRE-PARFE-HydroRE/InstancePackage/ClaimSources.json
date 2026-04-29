@@ -68,7 +68,7 @@
     {
       "id": "43be59e6-8f10-441e-96a8-31edf5c078eb",
       "name": "HCS Ledger Record",
-      "description": "Hedera Consensus Service immutable topic. Every TELEMETRY record and MINT_EVENT record is written here in sequence. Any party can independently verify the full telemetry history by replaying the topic from sequence 1 at https://hashscan.io - no account, no API key, and no trust in the issuing authority is required.",
+      "description": "Hedera Consensus Service immutable topic. Every TELEMETRY record and MINT_EVENT record is written here in sequence. Any party can independently verify the full telemetry history by replaying the topic from sequence 1 at https://hashscan.io - no account, no API key, and without relying solely on the issuing authority.",
       "sourceType": "Reference",
       "reportingFrequency": "Continuous",
       "sourceIdentifier": "hedera:hcs:1:0.0.7498906",
