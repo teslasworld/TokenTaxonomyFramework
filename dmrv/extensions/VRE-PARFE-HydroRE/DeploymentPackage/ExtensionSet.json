@@ -5,16 +5,22 @@
   "documentation": "https://github.com/teslasworld/VP-preprod",
   "entityExtensions": [
     {
-      "entityExtensionTemplateId": "edb5fa85-fe2b-463b-8aba-e5c72a0ff079",
-      "name": "VRE PARFE Site Options"
+      "templateId": "edb5fa85-fe2b-463b-8aba-e5c72a0ff079",
+      "dataType": "vreparfe.extensionSet.SiteOptions",
+      "data": "{}",
+      "extensionContext": "ExtensionSet"
     },
     {
-      "entityExtensionTemplateId": "0c050379-15d9-487d-98b9-11760b1ff70c",
-      "name": "Physics Gate Options"
+      "templateId": "0c050379-15d9-487d-98b9-11760b1ff70c",
+      "dataType": "vreparfe.extensionSet.PhysicsGateOptions",
+      "data": "{}",
+      "extensionContext": "ExtensionSet"
     },
     {
-      "entityExtensionTemplateId": "7b95892e-f646-4162-bcdf-201b48d4eaa1",
-      "name": "Ledger Attestation Options"
+      "templateId": "7b95892e-f646-4162-bcdf-201b48d4eaa1",
+      "dataType": "vreparfe.extensionSet.LedgerAttestationOptions",
+      "data": "{}",
+      "extensionContext": "ExtensionSet"
     }
   ],
   "modules": [
@@ -24,8 +30,10 @@
       "description": "Issues REC tokens (kWh) for verified renewable energy generation. One REC represents 100 kWh of hardware-attested renewable generation. ISO 14064-1:2018 compliant.",
       "entityExtensions": [
         {
-          "entityExtensionTemplateId": "5125e1db-816a-4b71-a70a-7d144b7fbbca",
-          "name": "REC Module Options"
+          "templateId": "5125e1db-816a-4b71-a70a-7d144b7fbbca",
+          "dataType": "vreparfe.extensionSet.RECModuleOptions",
+          "data": "{}",
+          "extensionContext": "ExtensionSetModule"
         }
       ]
     },
@@ -35,8 +43,10 @@
       "description": "Issues H2O tokens (m³) for verified water flow in run-of-river hydropower operation. One H2O token represents 5,000 litres of verified water flow. ISO 14046:2014 compliant.",
       "entityExtensions": [
         {
-          "entityExtensionTemplateId": "34fc1b92-517c-4c07-8b66-0ddc21c04bbc",
-          "name": "H2O Module Options"
+          "templateId": "34fc1b92-517c-4c07-8b66-0ddc21c04bbc",
+          "dataType": "vreparfe.extensionSet.H2OModuleOptions",
+          "data": "{}",
+          "extensionContext": "ExtensionSetModule"
         }
       ]
     },
@@ -46,8 +56,10 @@
       "description": "Issues CO2 tokens (kgCO₂e) representing the Grid Emission Factor (GEF)-adjusted carbon offset derived from verified renewable generation. co2Amount = measurementValue × gef. ISO 14064-1:2018 compliant.",
       "entityExtensions": [
         {
-          "entityExtensionTemplateId": "9b912725-d092-4311-9b7b-91b1f5554ead",
-          "name": "CO2 Module Options"
+          "templateId": "9b912725-d092-4311-9b7b-91b1f5554ead",
+          "dataType": "vreparfe.extensionSet.CO2ModuleOptions",
+          "data": "{}",
+          "extensionContext": "ExtensionSetModule"
         }
       ]
     }
