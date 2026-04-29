@@ -11,27 +11,27 @@
         {
           "variableTemplateId": "kwhReading",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "sem63-0002-kwh"
+          "sourceIdentifier": "ZEM63-0002-kwh"
         },
         {
           "variableTemplateId": "sensorRef",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "sem63-0002-sensorRef"
+          "sourceIdentifier": "ZEM63-0002-sensorRef"
         },
         {
           "variableTemplateId": "sensorSeq",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "sem63-0002-sensorSeq"
+          "sourceIdentifier": "ZEM63-0002-sensorSeq"
         },
         {
           "variableTemplateId": "edSig",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "sem63-0002-edSig"
+          "sourceIdentifier": "ZEM63-0002-edSig"
         },
         {
           "variableTemplateId": "payloadHash",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "sem63-0002-payloadHash"
+          "sourceIdentifier": "ZEM63-0002-payloadHash"
         }
       ]
     },
@@ -46,22 +46,22 @@
         {
           "variableTemplateId": "gatewayRef",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "zgw10-0001-gatewayRef"
+          "sourceIdentifier": "ZGW10-0001-gatewayRef"
         },
         {
           "variableTemplateId": "hcsTopicId",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "zgw10-0001-hcsTopicId"
+          "sourceIdentifier": "ZGW10-0001-hcsTopicId"
         },
         {
           "variableTemplateId": "hcsSeqFrom",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "zgw10-0001-hcsSeqFrom"
+          "sourceIdentifier": "ZGW10-0001-hcsSeqFrom"
         },
         {
           "variableTemplateId": "hcsSeqTo",
           "variableTemplateVersion": "VRE-PARFE:1.0",
-          "sourceIdentifier": "zgw10-0001-hcsSeqTo"
+          "sourceIdentifier": "ZGW10-0001-hcsSeqTo"
         }
       ]
     },
