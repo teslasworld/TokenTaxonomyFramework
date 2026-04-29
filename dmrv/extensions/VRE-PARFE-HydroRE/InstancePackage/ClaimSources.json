@@ -24,6 +24,11 @@
           "sourceIdentifier": "ZEM63-0002-sensorSeq"
         },
         {
+          "variableTemplateId": "monitoringType",
+          "variableTemplateVersion": "VRE-PARFE:1.0",
+          "sourceIdentifier": "ZEM63-0002-monitoringType"
+        },
+        {
           "variableTemplateId": "edSig",
           "variableTemplateVersion": "VRE-PARFE:1.0",
           "sourceIdentifier": "ZEM63-0002-edSig"
