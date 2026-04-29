@@ -13,7 +13,12 @@ option java_multiple_files = true;
 // A numeric measurement value with a unit of measure.
 message DoubleValue {
   double value = 1;
-  string u_o_m = 2;
+  string u_o_m = 2 [json_name = "u_o_m"];
+}
+
+// An integer measurement or sequence value.
+message Int64Value {
+  int64 value = 1;
 }
 
 // A string value wrapper.
@@ -93,66 +98,3 @@ message CO2ModuleOptions {
 message PhysicsGateOptions {
   double capacity_mw = 1;         // Installed generation capacity in megawatts
   double max_kwh_per_reading = 2; // Derived: capacityMW × 1000 × readingIntervalHours
-  string derived_from = 3;        // Always "GATEWAY_DEPLOY_HCS_RECORD"
-}
-
-// Ledger Attestation Options – extensionContext: ExtensionSet
-// Records the novel ledger-anchoring contribution of this Extension Set.
-// Every TELEMETRY record is signed with Ed25519 and anchored to HCS.
-// The full public key PEM is embedded in sig.pub of every TELEMETRY message,
-// enabling self-contained verification without an external key registry.
-message LedgerAttestationOptions {
-  string ledger = 1;               // "Hedera"
-  string network = 2;              // "mainnet" or "testnet"
-  string signature_algorithm = 3;  // "Ed25519"
-  string schema_immutability = 4;  // "FROZEN_OBJECT" – schema cannot be mutated post-signing
-  bool pub_key_in_payload = 5;     // true – full PEM in sig.pub on every HCS message
-}
-
-// Variable Template Options – extensionContext: VariableTemplate
-// Controls which variable templates apply per monitoring type and whether
-// a variable is required for the physics validation gate.
-message VariableTemplateOptions {
-  MonitoringType applies_for_monitoring_type = 1; // Use GENERATION (0) as sentinel for "ALL"
-  bool required_for_physics_check = 2;
-}
-
-// ─── Message pair types ──────────────────────────────────────────────────────
-
-// Hardware Attestation Verification – Request
-// Verifies the Ed25519 cryptographic signature on a specific TELEMETRY HCS record.
-message AttestationVerificationRequest {
-  string hcs_topic_id = 1;        // Hedera topic ID (format: 0.0.XXXXXXX)
-  int64 hcs_sequence_number = 2;  // Specific HCS sequence number to verify
-  string sensor_ref = 3;          // Sensor reference ID (format: SEN-ZEM63-XXXX)
-}
-
-// Hardware Attestation Verification – Response
-message AttestationVerificationResponse {
-  string hcs_topic_id = 1;
-  int64 hcs_sequence_number = 2;
-  string sensor_ref = 3;
-  bool signature_valid = 4;          // true if the Ed25519 signature is valid
-  string payload_hash = 5;           // SHA-256 hex hash of the stable-stringified payload
-  string public_key_fingerprint = 6; // Short fingerprint (kid) of the verification key
-}
-
-// Physics Gate Exception – Request
-// Records a physics gate rejection when kwh exceeds physicsLimitKwh.
-message PhysicsGateExceptionRequest {
-  string sensor_ref = 1;
-  string gateway_ref = 2;
-  double rejected_kwh = 3;
-  double physics_limit_kwh = 4;
-  google.protobuf.Timestamp timestamp = 5;
-}
-
-// Physics Gate Exception – Response
-message PhysicsGateExceptionResponse {
-  string sensor_ref = 1;
-  string gateway_ref = 2;
-  double rejected_kwh = 3;
-  double physics_limit_kwh = 4;
-  google.protobuf.Timestamp timestamp = 5;
-  string disposition_code = 6; // Fixed value: "REJECTED_PHYSICS_GATE"
-}
