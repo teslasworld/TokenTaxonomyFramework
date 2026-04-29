@@ -21,7 +21,7 @@ message StringValue {
   string value = 1;
 }
 
-// ─── Monitoring type enum ───────────────────────────────────────────────────────
+// ─── Monitoring type enum ──────────────────────────────────────────────────────
 // Maps to MONITORING_TYPE_MAP in SCHEMAS_V2.js.
 // Determines which token type is minted from a sensor's telemetry:
 //   GENERATION, SOLAR, HYDRO, WIND → REC
@@ -39,7 +39,7 @@ enum MonitoringType {
   EMISSIONS = 7;
 }
 
-// ─── Token type enum ────────────────────────────────────────────────────────────
+// ─── Token type enum ────────────────────────────────────────────────────────
 // Maps to TOKEN_TYPES in SCHEMAS_V2.js.
 
 enum TokenType {
@@ -48,7 +48,7 @@ enum TokenType {
   CO2 = 2;  // Carbon Offset Certificate – unit: kgCO₂e
 }
 
-// ─── GEF source enum ────────────────────────────────────────────────────────────
+// ─── GEF source enum ────────────────────────────────────────────────────────
 // Determines whether the Grid Emission Factor (GEF) is a hardcoded constant
 // (testnet) or a per-licensee value retrieved from the LICENSE_GRANT HCS record
 // (production).
@@ -117,7 +117,7 @@ message VariableTemplateOptions {
   bool required_for_physics_check = 2;
 }
 
-// ─── Message pair types ─────────────────────────────────────────────────────────
+// ─── Message pair types ──────────────────────────────────────────────────────
 
 // Hardware Attestation Verification – Request
 // Verifies the Ed25519 cryptographic signature on a specific TELEMETRY HCS record.
@@ -138,7 +138,7 @@ message AttestationVerificationResponse {
 }
 
 // Physics Gate Exception – Request
-// Records a physics gate rejection. Written when kwh > physicsLimitKwh.
+// Records a physics gate rejection when kwh exceeds physicsLimitKwh.
 message PhysicsGateExceptionRequest {
   string sensor_ref = 1;
   string gateway_ref = 2;
