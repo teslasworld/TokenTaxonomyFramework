@@ -1,0 +1,228 @@
+{
+  "id": "e0d357b0-a75a-40fa-838b-5a5d444d2216",
+  "name": "Origination Process Agreement for Concrete Plant 3341",
+  "description": "Origination Process Agreement for Concrete Plant 3341, with issuer Puro and verifier SustainCERT",
+  "primaryProjectModuleId": "",
+  "projectModules": [
+    {
+      "aimId": "d5a9cf0c-4102-4c9d-941a-408001b12147",
+      "description": "",
+      "extensionSetId": "",
+      "extensionSetModuleId": "",
+      "vvbId": "58827053-14ab-441d-8699-7108de68e687",
+      "verificationPlatformId": ""
+    }
+  ],
+  "signatories": [
+    {
+      "id": "60425f71-6d55-4875-b661-6bc1b1a4be8a",
+      "name": "Puro.earth",
+      "description": "Puro.earth is the world's leading platform for engineered carbon removal. Our mission is to mobilize the economy to reward carbon net negative emissions.",
+      "signatoryRole": "IssuingRegistry",
+      "signature": {
+        "type": "JWS",
+        "jws": "epx324jkasdf883429f2lMMm8asxdz9ZW0",
+        "hasJws": true,
+        "vc": null,
+        "signatureCase": "Jws"
+      },
+      "vvbIdForAim": ""
+    },
+    {
+      "id": "58827053-14ab-441d-8699-7108de68e687",
+      "name": "SustainCERT",
+      "description": "SustainCERT is an organization...",
+      "signatoryRole": "ValidationAndVerificationBody",
+      "signature": {
+        "type": "JWS",
+        "jws": "789908sa32980231ll132fsd89asdfa123",
+        "hasJws": true,
+        "vc": null,
+        "signatureCase": "Jws"
+      },
+      "vvbIdForAim": ""
+    },
+    {
+      "id": "9431e6b8-9601-460b-b0e3-c3da409da3de",
+      "name": "Eco-Earth Forest Growth",
+      "description": "Eco-Earth Forest Growth is a forest management firm that...",
+      "signatoryRole": "ProjectOwner",
+      "signature": {
+        "type": "JWS",
+        "jws": "1234567890asdfasdfas",
+        "hasJws": true,
+        "vc": null,
+        "signatureCase": "Jws"
+      },
+      "vvbIdForAim": ""
+    }
+  ],
+  "qualityStandard": {
+    "name": "Puro - Carbonated Building Materials",
+    "description": "Manufactured concrete-like building elements from steel slag (waste material from steel industry) instead of traditional cement. Basically, it’s CO2 negative concrete that removes more CO2 than its production emits.",
+    "standard": "Puro",
+    "methodologyAndTools": [
+      "VcsVm0026",
+      "VcsVm0009"
+    ],
+    "version": "1.0",
+    "coBenefits": [
+      "ClimateAction",
+      "LifeOnLand"
+    ],
+    "standardLink": {
+      "id": "be062a19-133c-4626-aa2d-bcca2c510ab2",
+      "uri": "https://puro.earth/carbon-removal-methods/carbonated-building-materials",
+      "description": "Link to the Carbonated Building Materials",
+      "hashProof": "1234567890abc12fasdfw43asdfasdf342",
+      "hashAlgorithm": "Sha256"
+    }
+  },
+  "mrvRequirements": {
+    "measurementSpecification": "Iso14064",
+    "specificationLink": {
+      "id": "efc93244-030d-48b8-95a5-9204c45dd679",
+      "uri": "https://www.iso.org/standard/70964.pdf",
+      "description": "Link to the ISO 14064-3:2018 standard",
+      "hashProof": "GX1234567890abc12fasdfw43asdfasdf342",
+      "hashAlgorithm": "Sha256"
+    },
+    "precision": {
+      "low": 0,
+      "medium": 0,
+      "high": 0
+    },
+    "claimPeriod": "Annual",
+    "extensionSetId": "",
+    "extensionSet": {
+      "id": "4004fcdd-db9a-4ebf-a288-c13a9b62013d",
+      "masterTemplateId": "c826c0b0-2e02-4615-b805-d0bf43988ae5",
+      "name": "",
+      "version": "1.0.0",
+      "description": "Extension Set for OriginationProcessAgreement",
+      "documentation": "",
+      "modules": [
+        {
+          "id": "9bfd1f89-19ef-4fe8-99a2-853df718f296",
+          "masterTemplateId": "715b7ee8-b508-421b-9780-30a79dfe3172",
+          "name": "",
+          "version": "1.0.0",
+          "description": "Extension SetModule for OriginationProcessAgreement",
+          "documentation": "",
+          "entityTemplates": [
+            {
+              "id": "39b89dce-91a9-4b64-b751-b9388a8bae2a",
+              "masterTemplateId": "",
+              "name": "Origination Process Agreement - Land Title Document",
+              "version": "",
+              "description": "An example entity extension for an Origination Process Agreement",
+              "documentation": "",
+              "extensionContext": "OriginationProcessAgreement",
+              "dataSchemaOrType": "LandTitleDocument",
+              "dataExample": "'{'owner': 'John Doe', 'landArea': '100 hectares', 'location': 'Amazon Rainforest' }'"
+            }
+          ],
+          "messagePairTemplates": [
+            {
+              "id": "bb9bed0e-1591-4865-9da6-67901729a95d",
+              "masterTemplateId": "",
+              "name": "Submit Land Title Document",
+              "version": "",
+              "description": "Sample request response message pair for an Origination Process Agreement",
+              "documentation": "",
+              "extensionContext": "OriginationProcessAgreement",
+              "requestDefinition": {
+                "protoData": null,
+                "dataType": "LandTitleSubmissionRequest",
+                "value": "'{'owner': 'John Doe', 'landArea': '100 hectares', 'location': 'Amazon Rainforest' }'"
+              },
+              "responseDefinition": {
+                "protoData": null,
+                "dataType": "LandTitleSubmissionResponse",
+                "value": "'{'status': 'Received', 'submissionId': 'abc123' }'"
+              }
+            }
+          ],
+          "formulaTemplates": [
+            {
+              "id": "bf7c0133-797a-40a5-9532-856f6e679784",
+              "masterTemplateId": "",
+              "name": "Origination Process Emission Factor Calculation",
+              "version": "1.0.0",
+              "formula": "",
+              "description": "An example formula template for an Origination Process Agreement",
+              "documentation": "",
+              "dataSchemaOrType": "EmissionFactorFormula",
+              "dataExample": "EF = (BaselineEmissions - ProjectEmissions) / 100",
+              "variableTemplates": []
+            }
+          ],
+          "variableTemplates": [
+            {
+              "id": "1dc44ce6-4f1d-4146-a3f4-c743aff40402",
+              "masterTemplateId": "",
+              "name": "Baseline Emissions",
+              "version": "1.0.0",
+              "description": "An example variable template for an Origination Process Agreement",
+              "documentation": "",
+              "alias": "",
+              "dataSchemaOrType": "BaselineEmissions",
+              "dataExample": "BASELINE_EMISSIONS = 5000",
+              "isCommerciallySensitive": false
+            }
+          ],
+          "parentSet": null
+        },
+        {
+          "id": "",
+          "masterTemplateId": "",
+          "name": "VM0007 REDD+ Methodology Framework Extension",
+          "version": "1.6",
+          "description": "Methodology specific data attributes being tracked.",
+          "documentation": "",
+          "entityTemplates": [
+            {
+              "id": "",
+              "masterTemplateId": "",
+              "name": "Δ𝐶𝑊𝑃𝑏𝑖𝑜𝑚𝑎𝑠𝑠,𝑡",
+              "version": "",
+              "description": "Change in carbon stock in biomass carbon pools in the project scenario in year 𝑡 (t C y-1)",
+              "documentation": "",
+              "extensionContext": "DataPackageManifest",
+              "dataSchemaOrType": "",
+              "dataExample": ""
+            }
+          ],
+          "messagePairTemplates": [],
+          "formulaTemplates": [],
+          "variableTemplates": [],
+          "parentSet": null
+        }
+      ]
+    }
+  },
+  "agreementDate": {
+    "dateTime": "",
+    "dateString": "9/9/2026"
+  },
+  "estimatedAnnualCredits": "15,000",
+  "auditSchedule": "Quinquennial",
+  "audits": {
+    "lastAuditDate": {
+      "dateTime": "",
+      "dateString": "9/9/2026"
+    },
+    "auditReports": [
+      {
+        "id": "424613f8-bec9-4ca0-b5ec-b6f5d4b02d8f",
+        "uri": "https://sustaincert.com/audit/e0d357b0-a75a-40fa-838b-5a5d444d2216",
+        "description": "Audit report for Origination process agreement e0d357b0-a75a-40fa-838b-5a5d444d2216",
+        "hashProof": "0xzxWW-1234567890abcdefasdf",
+        "hashAlgorithm": "Sha256"
+      }
+    ]
+  },
+  "extensions": [],
+  "activityImpactModule": null,
+  "processedClaims": []
+}
